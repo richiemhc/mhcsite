@@ -514,8 +514,10 @@ sup { font-size: 0.5em; vertical-align: super; font-weight: 400; }
 .us-map.is-zoomable { cursor: grab; }
 .us-map.is-grabbing { cursor: grabbing; }
 .map-legend {
-  position: relative; margin: -60px auto 0; max-width: 390px; background: var(--white);
-  border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.12); padding: 18px 26px; z-index: 2;
+  /* Sits BELOW the map (not floating over it) so it can never cover/block a dot —
+     the Hawaii inset lives at the map's bottom-center where this card used to overlap. */
+  position: relative; margin: 24px auto 0; max-width: 390px; background: var(--white);
+  border-radius: 8px; box-shadow: 0 6px 22px rgba(20,32,60,0.10); padding: 16px 26px; z-index: 2;
   display: flex; justify-content: center; gap: 34px; font-size: 13px; color: var(--gray);
 }
 .map-legend .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
