@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://merithillcapital.com/sitemap.xml
+Sitemap: https://richiemhc.github.io/mhcsite/sitemap.xml

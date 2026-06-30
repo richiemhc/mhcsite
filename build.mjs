@@ -90,7 +90,7 @@ for (const pg of PAGES) {
 console.log(`\n${built} pages built.`);
 
 // sitemap.xml (canonical production domain)
-const ORIGIN = "https://merithillcapital.com";
+const ORIGIN = "https://richiemhc.github.io/mhcsite";
 const LASTMOD = new Date().toISOString().slice(0, 10);
 const urls = PAGES.map((p) =>
   `  <url><loc>${ORIGIN}${p.canon}</loc><lastmod>${LASTMOD}</lastmod><changefreq>monthly</changefreq><priority>${p.canon === "/" ? "1.0" : "0.7"}</priority></url>`
