@@ -17,9 +17,31 @@ assets/
   fonts/             Self-hosted Roboto + Cantata One (woff2)
   img/               Optimized images (logo, textures, hero stills, properties, team, US map)
   video/             Hero background videos
+  data/portfolio.json  Property map dots (pixel coords + owned/sold flag) — generated, committed
 build.mjs            Assembles src/ into the final HTML pages at the repo root
 check-links.mjs      Audits built HTML for missing local asset references
 optimize-images.mjs  Resizes/recompresses images in assets/img (dev tool; needs `npm i`)
+```
+
+### Portfolio map + statistics data
+
+The portfolio page plots owned (navy) and sold (gold) property dots on the US map
+and shows headline stat tiles (current properties, states, units, square feet,
+metropolitan areas, total properties). Both come from `assets/data/portfolio.json`,
+a committed snapshot — the live site is static (GitHub Pages), so it never touches a
+database and no credentials ship to the browser. Each dot is clickable and opens a
+popover with that property's name, manager, address, acquisition year, and
+storage-unit count; the map zooms and pans (buttons / wheel / double-click / drag) by
+animating the SVG `viewBox` in `assets/js/main.js`, so dots and base map stay aligned.
+The stat tiles, the as-of date, and the portfolio figures in the home/expertise prose
+(`{{STAT_*}}` tokens) are injected at build time from this snapshot.
+
+The snapshot is produced by a local-only data pipeline that is intentionally kept
+out of this public repo (see `tools/README.md` locally). After it regenerates
+`assets/data/portfolio.json`, rebuild the pages:
+
+```sh
+node build.mjs                        # rebuild pages with the refreshed numbers
 ```
 
 Built pages live at the repo root so the site can be served as-is:

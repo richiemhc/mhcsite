@@ -23,7 +23,7 @@
   <meta name="twitter:image" content="https://richiemhc.github.io/mhcsite/assets/img/og-image.png">
   <link rel="preload" href="../assets/fonts/files/roboto-kfo7cnqeu92fr1me7ksn66agldtyluama3yuba.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/files/cantataone-pli5fl60nb5obnzne2jslwxdvce.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../assets/css/styles.css?v=db75c535">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=5319bc91">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -105,23 +105,28 @@
         <h2 class="section-title">Our Portfolio<sup>2</sup></h2>
         <p class="measure">Carefully built primarily through hundreds of small, one-asset deals selected from our extensive volume of unique and differentiated deal flow, we operate a diverse portfolio across the United States.</p>
         <div class="stats" style="margin-top:46px">
-          <div class="stat"><span class="stat__num" data-count="411">411</span><span class="stat__label">Current Properties</span></div>
-          <div class="stat"><span class="stat__num" data-count="39">39</span><span class="stat__label">States</span></div>
-          <div class="stat"><span class="stat__num" data-count="163" data-suffix="K+">163K+</span><span class="stat__label">Units</span></div>
-          <div class="stat"><span class="stat__num" data-count="25" data-suffix="M+">25M+</span><span class="stat__label">Square Feet</span></div>
-          <div class="stat"><span class="stat__num" data-count="133">133</span><span class="stat__label">Metropolitan Areas</span></div>
-          <div class="stat"><span class="stat__num" data-count="565">565</span><span class="stat__label">Total Properties</span></div>
+          <div class="stat"><span class="stat__num" data-count="422">422</span><span class="stat__label">Current Properties</span></div>
+          <div class="stat"><span class="stat__num" data-count="40">40</span><span class="stat__label">States</span></div>
+          <div class="stat"><span class="stat__num" data-count="168" data-suffix="K+">168K+</span><span class="stat__label">Units</span></div>
+          <div class="stat"><span class="stat__num" data-count="24" data-suffix="M+">24M+</span><span class="stat__label">Square Feet</span></div>
+          <div class="stat"><span class="stat__num" data-count="120">120</span><span class="stat__label">Metropolitan Areas</span></div>
+          <div class="stat"><span class="stat__num" data-count="574">574</span><span class="stat__label">Total Properties</span></div>
         </div>
       </div>
     </section>
 
     <section class="map-band">
       <div class="map-wrap reveal">
-        <img src="../assets/img/us-map.svg" alt="Map of the United States showing Merit Hill Capital's national footprint">
+        <svg class="us-map" viewBox="0 0 959 593" role="img"
+             aria-label="Map of the United States showing Merit Hill Capital's owned and sold properties"
+             data-points="../assets/data/portfolio.json">
+          <image href="../assets/img/us-map.svg" width="959" height="593"></image>
+          <g class="us-map__dots"></g>
+        </svg>
       </div>
       <div class="map-legend">
-        <span><span class="dot dot--owned"></span>Owned</span>
-        <span><span class="dot dot--sold"></span>Sold</span>
+        <span><span class="dot dot--owned"></span>Owned<span class="map-legend__count" data-count-owned></span></span>
+        <span><span class="dot dot--sold"></span>Sold<span class="map-legend__count" data-count-sold></span></span>
       </div>
     </section>
 
@@ -155,7 +160,7 @@
       </div>
     </section>
     <section class="footnotes">
-      <div class="container"><p>1. Certain statements represent Merit Hill&#8217;s opinions and views, which are inherently subjective.<br>2. As of December 31, 2025. Past performance is not predicative of future results. For illustrative purposes only.<br>3. Featured investments presented herein are for illustrative purposes only. They have been selected to provide examples of the types of investments made by Merit Hill Capital and do not purport to be a complete list thereof. It should not be assumed that investments made in the future will be comparable in quality or performance to the investments described herein. The inclusion of any third-party company names, brands and/or logos does not imply any affiliation with these companies or brands. None of these companies have endorsed Merit Hill, the Fund, or any associated entities or personnel.</p></div>
+      <div class="container"><p>1. Certain statements represent Merit Hill&#8217;s opinions and views, which are inherently subjective.<br>2. As of June 30, 2026. Past performance is not predicative of future results. For illustrative purposes only.<br>3. Featured investments presented herein are for illustrative purposes only. They have been selected to provide examples of the types of investments made by Merit Hill Capital and do not purport to be a complete list thereof. It should not be assumed that investments made in the future will be comparable in quality or performance to the investments described herein. The inclusion of any third-party company names, brands and/or logos does not imply any affiliation with these companies or brands. None of these companies have endorsed Merit Hill, the Fund, or any associated entities or personnel.</p></div>
     </section>
 
   </main>
@@ -190,7 +195,7 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=db75c535" defer></script>
+  <script src="../assets/js/main.js?v=5319bc91" defer></script>
 
 </body>
 </html>
