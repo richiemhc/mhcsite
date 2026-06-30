@@ -179,16 +179,6 @@ window.mhcTeamData = {
     "photo": "../assets/img/team/BrendanOster-1.jpg",
     "thumb": "../assets/img/team/BrendanOster-1-300x300.jpg"
   },
-  "1601": {
-    "name": "Colton Hoffman",
-    "title": "Associate, Investments",
-    "phone": "",
-    "email": "",
-    "linkedin": "",
-    "bio": "<p>Mr. Colton Hoffman serves as an Associate, Investments for Merit Hill Capital where he assists in the evaluation and underwriting of new self-storage investments.</p>\n<p>Prior to joining Merit Hill Capital in 2023, Colton was a Summer Analyst at Bridge Investment Group where he assisted in the acquisition, asset management, and disposition of assets for the multifamily team.</p>\n<p>Colton graduated Cum Laude in 2023 with a B.S. in Business Enterprise Management from The Wake Forest University School of Business and a minor in Entrepreneurship.</p>\n",
-    "photo": "../assets/img/team/Colton-Hoffman-1.jpg",
-    "thumb": "../assets/img/team/Colton-Hoffman-1-300x300.jpg"
-  },
   "1617": {
     "name": "Nina DiGregorio",
     "title": "Senior Accountant",
@@ -318,15 +308,5 @@ window.mhcTeamData = {
     "bio": "<p>Mr. Andres Rodriguez serves as Vice President of Asset Management at Merit Hill where he assists in the oversight of the day-to-day activities and operations at the 396 properties currently under ownership.  Additionally, he assists in identifying and executing value-add capital expenditure projects as well as expansion opportunities across the portfolio.</p>\n<p>Before joining Merit Hill, Andres served as the Director of Asset Management for Madison Capital Group, where he was responsible for managing the Go Store It Self Storage portfolio which consisted of 200 self-storage assets located across the country – representing $1.8 billion in asset value. Prior to Madison Capital Group Andres held roles with Nuveen Real Estate and CBRE.</p>\n<p>Andres graduated from Wesleyan University with a B.A. in Economics and earned a Master’s in Real Estate Finance from Georgetown University.</p>\n<p>&nbsp;</p>\n",
     "photo": "../assets/img/team/Andres-Rodriguez.jpg",
     "thumb": "../assets/img/team/Andres-Rodriguez-300x300.jpg"
-  },
-  "2311": {
-    "name": "Kaitlyn Price, CFA®",
-    "title": "Director, Head of Investor Relations",
-    "phone": "347-897-9390",
-    "email": "kaitlyn@merithillcapital.com",
-    "linkedin": "https://www.linkedin.com/in/kaitlyn-price-cfa-338b508/",
-    "bio": "<p><em><strong>Ms. Kaitlyn Price</strong> serves as Director, Head of Investor Relations at Merit Hill where she leads the firm’s investor communications and engagement across fundraising and ongoing partnership management. She brings over fifteen years of industry experience, cultivating and managing relationships with institutional investors, family offices, and high net worth individuals.</em></p>\n<p><em>Before joining Merit Hill, Kaitlyn spent 10 years at Zimmer Partners, an energy and infrastructure focused asset manager, as Director of Investor Relations overseeing client relationships for more than 150 investors. Prior to Zimmer Partners, Kaitlyn supported investor relations and marketing at Blue Harbour Group and began her career at Bain Capital Credit.</em></p>\n<p><em>Kaitlyn graduated magna cum laude from Northeastern University with a B.S. in Finance and holds the Chartered Financial Analyst designation.</em></p>\n",
-    "photo": "../assets/img/team/Kaitlyn-Price-headshot-021826.jpg",
-    "thumb": "../assets/img/team/Kaitlyn-Price-headshot-021826-300x300.jpg"
   }
 };
