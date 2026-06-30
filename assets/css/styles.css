@@ -464,21 +464,19 @@ sup { font-size: 0.5em; vertical-align: super; font-weight: 400; }
 /* ==========================================================================
    Footer
    ========================================================================== */
-.site-footer { background: var(--paper); border-top: 1px solid var(--line); }
-.footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 30px 56px; padding: 56px 30px 40px; }
+.site-footer { background: #f2f4fa; }
+.footer-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 64px; padding: 46px 30px; }
 .footer-logo img { width: 200px; height: auto; }
-.footer-head { font-family: var(--sans); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--navy); margin: 4px 0 16px; }
-.footer-list li { display: flex; align-items: center; gap: 12px; padding: 6px 0; color: var(--gray); font-size: 15px; }
-.footer-list a { color: var(--gray); }
+.footer-lists { display: flex; flex-direction: column; gap: 6px; }
+.footer-list li { display: flex; align-items: center; gap: 12px; padding: 5px 0; color: var(--navy); font-size: 15px; }
+.footer-ico { flex: 0 0 20px; display: inline-flex; align-items: center; justify-content: center; }
+.footer-ico svg { width: 17px; height: 17px; fill: var(--gold); }
+.footer-list a { color: var(--navy); }
 .footer-list a:hover { color: var(--teal-dark); }
-.footer-list svg { width: 17px; height: 17px; fill: var(--navy); flex: 0 0 auto; }
-.footer-bottom { border-top: 1px solid var(--line); }
-.footer-bottom__inner { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; align-items: center; padding: 18px 30px; font-size: 13px; color: var(--gray); }
-.footer-bottom__inner a { color: var(--gray); }
-.footer-bottom__inner a:hover { color: var(--teal-dark); }
+.footer-list--legal { margin-top: 6px; }
+.footer-list--legal .footer-ico svg { width: 16px; height: 16px; }
 @media (max-width: 767px) {
-  .footer-inner { gap: 28px; padding: 44px 30px 30px; }
-  .footer-bottom__inner { justify-content: center; text-align: center; }
+  .footer-inner { gap: 26px; padding: 40px 30px; }
 }
 
 /* ==========================================================================
