@@ -46,12 +46,17 @@ const PAGES = [
     desc: "Terms and Conditions of Use for the Merit Hill Capital website." },
 ];
 
+// Display order of team members (matches the original merithillcapital.com/team grid).
+// Integer-like object keys can't preserve order, so order is driven explicitly here.
+const TEAM_ORDER = ["37","372","46","61","49","361","59","1163","1762","2249","2250","1637","2035","1760","2246","1725","1506","1505","1721","1507","2233","1131","2039","1129","294","363","1617","1503","1160","969","1729"];
+
 // Build the team grid markup from the generated team data (keeps names/titles/photos in sync).
 function buildTeamGrid() {
   const js = fs.readFileSync(path.join(R, "assets/js/team-data.js"), "utf8");
   const json = js.replace(/^[\s\S]*?=\s*/, "").replace(/;\s*$/, "");
   const data = JSON.parse(json);
-  return Object.entries(data).map(([id, d]) =>
+  const ids = [...TEAM_ORDER.filter((id) => data[id]), ...Object.keys(data).filter((id) => !TEAM_ORDER.includes(id))];
+  return ids.map((id) => [id, data[id]]).map(([id, d]) =>
     `        <button class="team-card reveal" data-member="${id}">
           <img class="team-card__photo" src="${d.thumb}" alt="${(d.name || "").replace(/"/g, "&quot;")}" loading="lazy" width="220" height="220">
           <span class="team-card__name">${d.name || ""}</span>
