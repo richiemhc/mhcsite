@@ -146,12 +146,22 @@
   /* ---- Scroll reveal ---- */
   const reveals = document.querySelectorAll(".reveal");
   if (reveals.length && !REDUCE) {
+    // threshold 0 (+ small bottom margin) so it fires for elements taller than the
+    // viewport too — a high threshold never resolves for very tall blocks and would
+    // leave them stuck at opacity:0.
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) { entry.target.classList.add("in"); io.unobserve(entry.target); }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
     reveals.forEach((r) => io.observe(r));
+    // Safety net: anything still hidden after load that's already in view gets shown.
+    window.addEventListener("load", () => {
+      reveals.forEach((r) => {
+        const rect = r.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) r.classList.add("in");
+      });
+    });
   } else {
     reveals.forEach((r) => r.classList.add("in"));
   }
