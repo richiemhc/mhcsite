@@ -71,7 +71,7 @@ function buildTimeline() {
   const top = ms.map((m, i) => `<div class="mhts-item">${i % 2 === 0 ? card(m) : ""}</div>`).join("");
   const bot = ms.map((m, i) => `<div class="mhts-item">${i % 2 === 1 ? card(m) : ""}</div>`).join("");
   const mid = ms.map(() => `<div class="mhts-item"><div class="mhts-dot"></div></div>`).join("");
-  return `<div class="mhts-wrap" id="mhts-wrap" data-count="${ms.length}">
+  return `<div class="mhts-wrap" id="mhts-wrap" data-total="${ms.length}">
           <button class="mhts-arrow mhts-prev" id="mhts-prev" aria-label="Previous milestones" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16.4 1.45L18.4 3.475L9.825 12.05L18.4 20.625L16.4 22.65L5.8 12.05L16.4 1.45Z" fill="currentColor"/></svg></button>
           <div class="mhts-vp" id="mhts-vp"><div class="mhts-track" id="mhts-track">
             <div class="mhts-row mhts-row-top">${top}</div>

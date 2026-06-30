@@ -197,7 +197,7 @@
     const next = document.getElementById("mhts-next");
     if (!wrap || !vp || !track || !mid || !prev || !next) return; // not present / not ready yet
     mountMhts.done = true;
-    const TOTAL = parseInt(wrap.dataset.count || "22", 10);
+    const TOTAL = parseInt(wrap.dataset.total || "22", 10);
     const STEP = 100 / TOTAL;
     let cur = 0;
     const vis = () => { const w = vp.offsetWidth; return w < 600 ? 1 : w < 900 ? 2 : 3; };
