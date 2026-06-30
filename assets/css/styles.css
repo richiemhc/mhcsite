@@ -395,13 +395,30 @@ sup { font-size: 0.5em; vertical-align: super; font-weight: 400; }
 /* ==========================================================================
    Footer
    ========================================================================== */
-.site-footer { background: var(--white); border-top: 1px solid var(--line); padding: 50px 0; }
-.footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px; justify-content: space-between; }
-.footer-logo img { width: 220px; height: auto; }
-.footer-list li { display: flex; align-items: center; gap: 12px; padding: 7px 0; color: var(--gray); font-size: 15px; }
+.site-footer { background: var(--paper); border-top: 1px solid var(--line); }
+.footer-inner { display: grid; grid-template-columns: 1.5fr 1fr 1.3fr; gap: 30px 56px; align-items: start; padding: 60px 30px 44px; }
+.footer-logo img { width: 200px; height: auto; }
+.footer-brand p { margin: 18px 0 0; color: var(--gray); font-size: 14px; line-height: 1.6; max-width: 300px; }
+.footer-head { font-family: var(--sans); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--navy); margin: 4px 0 16px; }
+.footer-nav li { padding: 6px 0; }
+.footer-nav a { color: var(--gray); font-size: 15px; }
+.footer-nav a:hover { color: var(--teal-dark); }
+.footer-list li { display: flex; align-items: center; gap: 12px; padding: 6px 0; color: var(--gray); font-size: 15px; }
 .footer-list a { color: var(--gray); }
 .footer-list a:hover { color: var(--teal-dark); }
-.footer-list svg { width: 18px; height: 18px; fill: var(--navy); flex: 0 0 auto; }
+.footer-list svg { width: 17px; height: 17px; fill: var(--navy); flex: 0 0 auto; }
+.footer-social { display: flex; gap: 12px; margin-top: 20px; }
+.footer-social a { width: 36px; height: 36px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; transition: background 0.2s var(--ease); }
+.footer-social a:hover { background: var(--teal-dark); }
+.footer-social svg { width: 16px; height: 16px; fill: var(--white); }
+.footer-bottom { border-top: 1px solid var(--line); }
+.footer-bottom__inner { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; align-items: center; padding: 18px 30px; font-size: 13px; color: var(--gray); }
+.footer-bottom__inner a { color: var(--gray); }
+.footer-bottom__inner a:hover { color: var(--teal-dark); }
+@media (max-width: 767px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 30px; padding: 48px 30px 32px; text-align: left; }
+  .footer-bottom__inner { justify-content: center; text-align: center; }
+}
 
 /* ==========================================================================
    CTA item list (Why Merit Hill?, Driving Value strategy)
