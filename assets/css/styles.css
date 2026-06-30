@@ -368,20 +368,41 @@ sup { font-size: 0.5em; vertical-align: super; font-weight: 400; }
 
 .modal { position: fixed; inset: 0; z-index: 300; display: none; }
 .modal.open { display: block; }
-.modal__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
+.modal__backdrop { position: absolute; inset: 0; background: rgba(15,23,42,0.62); backdrop-filter: blur(3px); }
 .modal__panel {
-  position: relative; max-width: 720px; margin: 6vh auto; background: var(--white);
-  display: grid; grid-template-columns: 260px 1fr; gap: 0; max-height: 88vh; overflow: hidden;
+  position: relative; width: min(560px, calc(100% - 32px)); max-height: 90vh; margin: 5vh auto;
+  background: var(--white); border-radius: 16px; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+  animation: modalIn 0.32s var(--ease);
 }
-.modal__photo { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s; }
+@keyframes modalIn { from { opacity: 0; transform: translateY(18px) scale(0.97); } to { opacity: 1; transform: none; } }
+.modal__top { flex: 0 0 auto; background: var(--navy); color: var(--white); text-align: center; padding: 40px 36px 30px; }
+.modal__photo {
+  width: 132px; height: 132px; border-radius: 50%; object-fit: cover; object-position: center top;
+  margin: 0 auto 18px; border: 3px solid rgba(255,255,255,0.9); background: var(--paper);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35); opacity: 0; transition: opacity 0.3s;
+}
 .modal__photo.is-loaded { opacity: 1; }
-.modal__body { padding: 40px; overflow-y: auto; }
-.modal__name { font-family: var(--serif); font-size: 26px; color: var(--navy); margin-bottom: 2px; }
-.modal__title { color: var(--gold-text); font-weight: 600; margin-bottom: 18px; }
-.modal__bio { color: var(--gray); font-size: 15px; }
-.modal__contact { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
-.modal__contact a { color: var(--navy); }
-.modal__close { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 28px; color: var(--navy); z-index: 2; }
+.modal__name { font-family: var(--serif); font-size: 25px; color: var(--white); margin: 0 0 5px; line-height: 1.2; }
+.modal__title { color: #e0bf66; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; margin: 0; }
+.modal__body { flex: 1 1 auto; overflow-y: auto; padding: 28px 36px; }
+.modal__bio { color: var(--ink); font-size: 15px; line-height: 1.7; }
+.modal__bio p { margin: 0 0 1em; }
+.modal__contact { flex: 0 0 auto; display: flex; flex-wrap: wrap; gap: 10px; padding: 18px 36px 26px; border-top: 1px solid var(--line); }
+.modal__contact:empty { display: none; }
+.modal__contact a {
+  display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; color: var(--navy);
+  background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.modal__contact a:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.modal__close {
+  position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.16); border: none; color: var(--white); font-size: 22px; line-height: 1;
+  display: flex; align-items: center; justify-content: center; z-index: 3; transition: background 0.2s var(--ease);
+}
+.modal__close:hover { background: rgba(255,255,255,0.32); }
 
 /* ==========================================================================
    Contact form
@@ -502,8 +523,10 @@ sup { font-size: 0.5em; vertical-align: super; font-weight: 400; }
   .carousel__track > *, .carousel--props .carousel__track > * { flex-basis: 100%; }
   .carousel__btn--prev { left: -4px; }
   .carousel__btn--next { right: -4px; }
-  .modal__panel { grid-template-columns: 1fr; margin: 4vh 16px; }
-  .modal__photo { max-height: 300px; }
+  .modal__top { padding: 34px 24px 26px; }
+  .modal__photo { width: 110px; height: 110px; }
+  .modal__body { padding: 24px; }
+  .modal__contact { padding: 16px 24px 22px; }
   .contact-form { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
   /* left-rail timeline on mobile: dot + year, text below */
