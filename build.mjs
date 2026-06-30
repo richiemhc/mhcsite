@@ -69,3 +69,12 @@ for (const pg of PAGES) {
   console.log("built", pg.out);
 }
 console.log(`\n${built} pages built.`);
+
+// sitemap.xml (canonical production domain)
+const ORIGIN = "https://merithillcapital.com";
+const urls = PAGES.map((p) =>
+  `  <url><loc>${ORIGIN}${p.canon}</loc><changefreq>monthly</changefreq><priority>${p.canon === "/" ? "1.0" : "0.7"}</priority></url>`
+).join("\n");
+fs.writeFileSync(path.join(R, "sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
+console.log("sitemap.xml written");

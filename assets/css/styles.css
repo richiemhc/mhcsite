@@ -80,6 +80,9 @@ sup { font-size: 0.5em; vertical-align: super; font-weight: 400; }
 .center { text-align: center; }
 .measure { max-width: 760px; margin-left: auto; margin-right: auto; }
 
+/* h1 that should read visually like a section h3 (e.g. Contact) */
+.h1-sans { font-family: var(--sans); font-size: clamp(28px, 4vw, 38px); font-weight: 400; line-height: 1.2; }
+
 /* Accent words inside headings */
 .t-gold { color: var(--gold); }
 .t-navy { color: var(--navy); }
@@ -419,8 +422,12 @@ sup { font-size: 0.5em; vertical-align: super; font-weight: 400; }
   .modal__panel { grid-template-columns: 1fr; margin: 4vh 16px; }
   .modal__photo { max-height: 300px; }
   .contact-form { grid-template-columns: 1fr; }
-  .timeline::before { left: 60px; }
-  .tl-item { grid-template-columns: 60px 1fr; gap: 18px; }
-  .tl-item__year { font-size: 19px; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  /* left-rail timeline on mobile: dot + year, text below */
+  .timeline::before { left: 6px; }
+  .tl-item { grid-template-columns: 1fr; gap: 2px; padding: 0 0 26px 30px; }
+  .tl-item__year { text-align: left; font-size: 20px; line-height: 1.1; position: relative; }
+  .tl-item__year::before { content: ""; position: absolute; left: -30px; top: 5px; width: 13px; height: 13px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px var(--navy); }
+  .tl-item__body::before { display: none; }
   .section { padding: 56px 0; }
 }
