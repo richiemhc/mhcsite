@@ -50,12 +50,21 @@
     if (next) next.addEventListener("click", () => go(1));
     if (prev) prev.addEventListener("click", () => go(-1));
 
-    // autoplay
+    const scrollable = () => track.scrollWidth - track.clientWidth > 4;
+    let timer = null;
     const delay = parseInt(carousel.dataset.autoplay || "0", 10);
+    function sync() {
+      const on = scrollable();
+      if (prev) prev.hidden = !on;
+      if (next) next.hidden = !on;
+      if (timer) { clearInterval(timer); timer = null; }
+      if (on && delay > 0) timer = setInterval(() => go(1), delay);
+    }
+    sync();
+    window.addEventListener("resize", sync);
     if (delay > 0) {
-      let timer = setInterval(() => go(1), delay);
-      carousel.addEventListener("mouseenter", () => clearInterval(timer));
-      carousel.addEventListener("mouseleave", () => { timer = setInterval(() => go(1), delay); });
+      carousel.addEventListener("mouseenter", () => { if (timer) { clearInterval(timer); timer = null; } });
+      carousel.addEventListener("mouseleave", () => { if (scrollable() && !timer) timer = setInterval(() => go(1), delay); });
     }
   });
 
