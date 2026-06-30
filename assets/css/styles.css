@@ -184,6 +184,15 @@ sup { font-size: 0.5em; vertical-align: super; font-weight: 400; }
 .hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 1; }
 .hero__inner { position: relative; z-index: 2; max-width: 850px; }
 .hero h1 { color: var(--white); margin: 0; }
+.hero__videobtn {
+  position: absolute; z-index: 3; bottom: 18px; right: 18px;
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.55); background: rgba(0,0,0,0.35);
+  color: #fff; font-size: 13px; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s var(--ease);
+}
+.hero__videobtn:hover { background: rgba(0,0,0,0.65); }
 .hero--page { min-height: 52vh; padding: 120px 30px; }
 
 /* Hero with image background (interior pages) */

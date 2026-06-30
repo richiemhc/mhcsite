@@ -156,13 +156,25 @@
     reveals.forEach((r) => r.classList.add("in"));
   }
 
-  /* ---- Hero video: don't autoplay under reduced-motion / Save-Data (poster shows) ---- */
-  if (REDUCE || SAVE_DATA) {
-    document.querySelectorAll("video.hero__media").forEach((v) => {
-      v.autoplay = false; v.removeAttribute("autoplay");
-      try { v.pause(); } catch (e) {}
-    });
-  }
+  /* ---- Hero video: autoplay (muted, looping) + a pause/play control (WCAG 2.2.2) ---- */
+  document.querySelectorAll("video.hero__media").forEach((v) => {
+    const hero = v.closest(".hero");
+    if (!hero) return;
+    v.muted = true;                 // required for autoplay
+    v.play().catch(() => {});       // nudge playback (some browsers need an explicit call after JS runs)
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "hero__videobtn";
+    const sync = () => {
+      btn.textContent = v.paused ? "▶" : "⏸";
+      btn.setAttribute("aria-label", v.paused ? "Play background video" : "Pause background video");
+    };
+    btn.addEventListener("click", () => { v.paused ? v.play() : v.pause(); });
+    v.addEventListener("play", sync);
+    v.addEventListener("pause", sync);
+    sync();
+    hero.appendChild(btn);
+  });
 
   /* ---- Contact form (static: compose a mailto) ---- */
   const cform = document.getElementById("contactForm");
