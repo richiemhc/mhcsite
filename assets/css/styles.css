@@ -301,12 +301,12 @@ sup { font-size: 0.5em; vertical-align: super; font-weight: 400; }
 .team-card { display: flex; flex-direction: column; align-items: center; text-align: center; background: none; border: none; padding: 0; cursor: pointer; }
 .team-card__photo {
   width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 20%;
-  filter: grayscale(1); border-radius: 6px; background: var(--paper);
+  border-radius: 6px; background: var(--paper);
   box-shadow: 0 6px 18px rgba(35,66,123,0.10);
-  transition: filter 0.4s var(--ease), transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
 .team-card:hover .team-card__photo, .team-card:focus-visible .team-card__photo {
-  filter: grayscale(0); transform: translateY(-6px); box-shadow: 0 16px 32px rgba(35,66,123,0.22);
+  transform: translateY(-6px); box-shadow: 0 16px 32px rgba(35,66,123,0.22);
 }
 .team-card__name {
   display: block; margin: 16px 0 0; font-family: var(--serif); font-size: 17px;
