@@ -1,63 +1,57 @@
-# Merit Hill Capital — local mirror
+# Merit Hill Capital — website
 
-A verbatim, offline copy of https://merithillcapital.com/ (WordPress + Elementor),
-captured as static files. All HTML, CSS, JS, images, fonts, and the hero video are
-local; absolute URLs have been rewritten to relative paths.
+A clean, hand-built static recreation of merithillcapital.com. Semantic HTML, one
+consolidated stylesheet, and a small amount of dependency-free JavaScript. No WordPress,
+no Elementor, no plugins.
 
-## Pages
+## Structure
 
-- `index.html` — Home
-- `about/` — About
-- `expertise/` — Expertise
-- `team/` — Team
-- `portfolio/` — Portfolio
-- `contact/` — Contact
-- `terms-and-conditions-of-use/` — Terms & Conditions
-
-## Run it
-
-Serve the folder over HTTP (needed so directory URLs resolve to `index.html` and the
-video/fonts load with correct MIME types):
-
-```sh
-# any one of these, from this directory:
-python -m http.server 8000
-# or
-npx serve .
+```
+src/
+  layout.html        Shared shell: <head>, header, nav, footer (one source of truth)
+  pages/*.html       Per-page <main> content fragments
+assets/
+  css/styles.css     All styles (brand tokens, layout, components, responsive)
+  js/main.js         Mobile menu, carousels, count-up stats, scroll reveal, team modal, contact form
+  js/team-data.js    Team roster data (names, titles, bios, photos) for the modal
+  fonts/             Self-hosted Roboto + Cantata One (woff2)
+  img/               Optimized images (logo, textures, hero stills, properties, team, US map)
+  video/             Hero background videos
+build.mjs            Assembles src/ into the final HTML pages at the repo root
+check-links.mjs      Audits built HTML for missing local asset references
+optimize-images.mjs  Resizes/recompresses images in assets/img (dev tool; needs `npm i`)
 ```
 
-Then open http://localhost:8000/ . Opening `index.html` directly via `file://` mostly
-works but the background video and some relative directory links resolve more reliably
-over HTTP.
+Built pages live at the repo root so the site can be served as-is:
+`index.html`, `about/`, `expertise/`, `team/`, `portfolio/`, `contact/`,
+`terms-and-conditions-of-use/`.
 
-## Preserved interactivity
+## Develop
 
-- Hero background video (`wp-content/uploads/2025/02/storage_header.mp4`)
-- Elementor flip-box carousels (Swiper) — investment approach + featured investments
-- Sticky header, mobile hamburger popup menu, scroll fade-in animations
-- Team page member modals (data is inlined as `mhcTeamData`; photos are local)
+```sh
+node build.mjs          # regenerate the HTML pages from src/
+node check-links.mjs     # verify no broken local references
+python -m http.server 8000   # preview at http://localhost:8000/
+```
 
-## How it was built
+Edit content in `src/pages/*.html`, shared chrome in `src/layout.html`, styles in
+`assets/css/styles.css`, then re-run `node build.mjs`. The header/footer/nav are defined
+once in the layout and injected into every page. The team grid is generated from
+`assets/js/team-data.js`, so adding or editing a person happens in one place.
 
-`mirror.mjs` downloads each page and all referenced assets via `curl` (with a desktop
-Chrome User-Agent, required to pass the site's Cloudflare bot check), discovers nested
-assets inside CSS `url()` rules, then rewrites every `merithillcapital.com` URL —
-including JSON-escaped and double-escaped forms in Elementor `data-settings` — to a
-path relative to each file. Re-run with `node mirror.mjs`. `check-links.mjs` audits the
-saved HTML for any local asset reference that is missing on disk.
+To re-optimize images after adding new ones: `npm install` then `node optimize-images.mjs`.
 
-## Known limitations (offline)
+## Deploy
 
-- **WordPress head metadata endpoints** (`/feed/`, `/comments/feed/`, `/wp-json/...`,
-  `/xmlrpc.php`, oEmbed links) are `<link rel>` discovery tags only. They are not
-  fetched while rendering and do not affect the page; they 404 offline (they resolve on
-  the live origin). Left in place to keep the markup verbatim.
-- **Contact page map:** the live site uses the `wp-google-maps` plugin. An interactive
-  Google map tile requires the live Google Maps API and will not render offline; the rest
-  of the contact page is intact.
-- **Font Awesome kit** (`kit.fontawesome.com/...js`) is left pointing at its remote URL.
-  All icons used on the site are already inlined as SVG, so this has no visible effect.
-- External links are intentionally left remote: **LOGIN** (`clients.alterdomus.com`) and
-  the LinkedIn/Twitter references in the page's structured data.
-- Cloudflare's email-obfuscation script and challenge script were removed; the obfuscated
-  address was decoded back to a working `mailto:` link.
+The repo root is a static site — push to the `main` branch and GitHub Pages serves it.
+Live at https://richiemhc.github.io/mhcsite/.
+
+## Notes
+
+- Brand palette: navy `#23427B`, gold `#B49430`, teal `#009DB7`. Display font Cantata One,
+  body font Roboto — both self-hosted.
+- The contact form is static; submitting composes a `mailto:` to IR@merithillcapital.com.
+  Wire it to a form backend (Formspree, Netlify Forms, etc.) for server-side delivery.
+- The portfolio "national footprint" uses a public-domain US map (the live site used an
+  interactive Google Map, which requires the Maps API and a key).
+- `LOGIN` links to the external investor portal (clients.alterdomus.com).
