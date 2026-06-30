@@ -186,6 +186,42 @@
     hero.appendChild(btn);
   });
 
+  /* ---- Key Milestones: horizontal zigzag timeline slider ---- */
+  function mountMhts() {
+    if (mountMhts.done) return;
+    const wrap = document.getElementById("mhts-wrap");
+    const vp = document.getElementById("mhts-vp");
+    const track = document.getElementById("mhts-track");
+    const mid = document.getElementById("mhts-mid");
+    const prev = document.getElementById("mhts-prev");
+    const next = document.getElementById("mhts-next");
+    if (!wrap || !vp || !track || !mid || !prev || !next) return; // not present / not ready yet
+    mountMhts.done = true;
+    const TOTAL = parseInt(wrap.dataset.count || "22", 10);
+    const STEP = 100 / TOTAL;
+    let cur = 0;
+    const vis = () => { const w = vp.offsetWidth; return w < 600 ? 1 : w < 900 ? 2 : 3; };
+    const posArrows = () => {
+      const wr = wrap.getBoundingClientRect(), mr = mid.getBoundingClientRect();
+      prev.style.top = next.style.top = (mr.top + mr.height / 2 - wr.top) + "px";
+    };
+    const render = () => {
+      const mx = TOTAL - vis();
+      cur = Math.max(0, Math.min(cur, mx));
+      track.style.transform = "translateX(-" + (cur * STEP) + "%)";
+      prev.disabled = cur === 0;
+      next.disabled = cur >= mx;
+      posArrows();
+    };
+    prev.addEventListener("click", () => { cur -= 1; render(); });
+    next.addEventListener("click", () => { cur += 1; render(); });
+    render();
+    let t;
+    window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(render, 120); });
+  }
+  mountMhts();
+  window.addEventListener("load", mountMhts);
+
   /* ---- Contact form (static: compose a mailto) ---- */
   const cform = document.getElementById("contactForm");
   if (cform) {

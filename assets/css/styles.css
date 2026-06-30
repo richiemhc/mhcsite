@@ -326,26 +326,45 @@ sup { font-size: 0.5em; vertical-align: super; font-weight: 400; }
 .band-navy .ticks li { border-color: rgba(255,255,255,0.18); }
 
 /* ==========================================================================
-   Timeline (About — Key Milestones)
+   Key Milestones — horizontal zigzag sliding timeline (mhts)
    ========================================================================== */
-.timeline { position: relative; max-width: 760px; margin: 0 auto; }
-.timeline::before { content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: rgba(255,255,255,0.28); }
-.tl-item { position: relative; padding: 0 0 30px 40px; }
-.tl-item:last-child { padding-bottom: 0; }
-.tl-item::before {
-  content: ""; position: absolute; left: 1px; top: 5px; width: 16px; height: 16px; border-radius: 50%;
-  background: var(--gold); box-shadow: 0 0 0 4px var(--navy);
-}
-.tl-item__year { display: block; font-family: var(--serif); font-size: 22px; color: #e6c879; line-height: 1.1; margin-bottom: 5px; }
-.tl-item__body p { color: rgba(255,255,255,0.92); margin: 0; }
+.mhts-wrap, .mhts-wrap *, .mhts-wrap *::before, .mhts-wrap *::after { box-sizing: border-box; }
+.mhts-wrap { position: relative; max-width: 1000px; margin: 10px auto 0; color: var(--white); }
+.mhts-vp { overflow: hidden; position: relative; width: 100%; }
+.mhts-track { width: calc(100% / 3 * 22); transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+.mhts-row { display: flex; flex-wrap: nowrap; }
+.mhts-item { flex: 0 0 calc(100% / 22); max-width: calc(100% / 22); padding: 0 10px; }
+@media (max-width: 899px) { .mhts-track { width: calc(100% / 2 * 22); } }
+@media (max-width: 599px) { .mhts-track { width: calc(100% / 1 * 22); } }
+
+.mhts-row-top .mhts-item { display: flex; align-items: flex-end; }
+.mhts-row-top .mhts-card { width: 100%; text-align: center; display: flex; flex-direction: column; padding-bottom: 16px; }
+.mhts-row-bot .mhts-item { display: flex; align-items: flex-start; }
+.mhts-row-bot .mhts-card { width: 100%; text-align: center; padding-top: 16px; }
+
+.mhts-row-mid { position: relative; }
+.mhts-row-mid .mhts-item { display: flex; justify-content: center; align-items: center; height: 40px; position: relative; z-index: 1; padding: 0; }
+.mhts-line { position: absolute; top: 50%; left: calc(100% / 22 / 2); width: calc(100% - 100% / 22); height: 2px; background: rgba(255,255,255,0.45); transform: translateY(-50%); z-index: 0; }
+.mhts-dot { width: 15px; height: 15px; border-radius: 50%; background: var(--gold); position: relative; z-index: 2; flex-shrink: 0; box-shadow: 0 0 0 4px var(--navy); }
+
+.mhts-card-title { font-family: var(--serif); font-size: 21px; font-weight: 400; color: #e6c879; margin: 0 0 6px; line-height: 1.1; }
+.mhts-card-desc { font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.92); margin: 0; }
+
+.mhts-arrow { position: absolute; top: 50%; background: none; border: none; cursor: pointer; padding: 6px; z-index: 10; transform: translateY(-50%); display: flex; align-items: center; color: var(--white); }
+.mhts-arrow:disabled { cursor: default; pointer-events: none; color: rgba(255,255,255,0.35); }
+.mhts-prev { left: -36px; }
+.mhts-next { right: -36px; }
+@media (max-width: 1080px) { .mhts-prev { left: -4px; } .mhts-next { right: -4px; } }
 
 /* ==========================================================================
    Testimonials
    ========================================================================== */
-.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-.quote { background: var(--paper); padding: 34px; border-top: 3px solid var(--gold); }
-.quote blockquote { margin: 0 0 14px; font-size: 17px; color: var(--ink); font-style: italic; }
-.quote cite { color: var(--navy); font-style: normal; font-weight: 600; font-size: 15px; }
+/* Single-at-a-time testimonial carousel (matches the original site format) */
+.carousel--quotes .carousel__track { gap: 0; }
+.carousel--quotes .carousel__track > * { flex: 0 0 100%; max-width: 100%; }
+.quote-slide { max-width: 820px; margin: 0 auto; text-align: center; padding: 8px 24px 4px; }
+.quote-slide p { margin: 0; font-size: clamp(17px, 2.1vw, 21px); line-height: 1.65; font-style: italic; color: var(--ink); }
+.quote-slide cite { display: block; margin-top: 22px; font-style: normal; font-weight: 600; color: var(--navy); font-size: 15px; }
 
 /* ==========================================================================
    Team grid + modal

@@ -64,12 +64,31 @@ function buildTeamGrid() {
         </button>`).join("\n");
 }
 
+// Build the original-style horizontal "zigzag" milestone timeline (mhts).
+function buildTimeline() {
+  const ms = JSON.parse(fs.readFileSync(path.join(R, "src/data/milestones.json"), "utf8"));
+  const card = (m) => `<div class="mhts-card"><h5 class="mhts-card-title">${m.year}</h5><p class="mhts-card-desc">${m.desc}</p></div>`;
+  const top = ms.map((m, i) => `<div class="mhts-item">${i % 2 === 0 ? card(m) : ""}</div>`).join("");
+  const bot = ms.map((m, i) => `<div class="mhts-item">${i % 2 === 1 ? card(m) : ""}</div>`).join("");
+  const mid = ms.map(() => `<div class="mhts-item"><div class="mhts-dot"></div></div>`).join("");
+  return `<div class="mhts-wrap" id="mhts-wrap" data-count="${ms.length}">
+          <button class="mhts-arrow mhts-prev" id="mhts-prev" aria-label="Previous milestones" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16.4 1.45L18.4 3.475L9.825 12.05L18.4 20.625L16.4 22.65L5.8 12.05L16.4 1.45Z" fill="currentColor"/></svg></button>
+          <div class="mhts-vp" id="mhts-vp"><div class="mhts-track" id="mhts-track">
+            <div class="mhts-row mhts-row-top">${top}</div>
+            <div class="mhts-row mhts-row-mid" id="mhts-mid"><div class="mhts-line"></div>${mid}</div>
+            <div class="mhts-row mhts-row-bot">${bot}</div>
+          </div></div>
+          <button class="mhts-arrow mhts-next" id="mhts-next" aria-label="Next milestones"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7.6 22.55L5.6 20.525L14.175 11.95L5.6 3.375L7.6 1.35L18.2 11.95L7.6 22.55Z" fill="currentColor"/></svg></button>
+        </div>`;
+}
+
 let built = 0;
 for (const pg of PAGES) {
   const depth = pg.out.split("/").length - 1;
   const prefix = depth === 0 ? "" : "../".repeat(depth);
   let main = fs.readFileSync(path.join(R, "src/pages", pg.file), "utf8");
   if (pg.file === "team.html") main = main.replace("{{TEAM_GRID}}", buildTeamGrid());
+  if (pg.file === "about.html") main = main.replace("{{TIMELINE}}", buildTimeline());
 
   let html = layout
     .replace("{{MAIN}}", main)
