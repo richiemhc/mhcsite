@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://merithillcapital.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://merithillcapital.com/about/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://merithillcapital.com/expertise/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://merithillcapital.com/team/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://merithillcapital.com/portfolio/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://merithillcapital.com/contact/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://merithillcapital.com/terms-and-conditions-of-use/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://merithillcapital.com/</loc><lastmod>2026-06-30</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://merithillcapital.com/about/</loc><lastmod>2026-06-30</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://merithillcapital.com/expertise/</loc><lastmod>2026-06-30</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://merithillcapital.com/team/</loc><lastmod>2026-06-30</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://merithillcapital.com/portfolio/</loc><lastmod>2026-06-30</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://merithillcapital.com/contact/</loc><lastmod>2026-06-30</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://merithillcapital.com/terms-and-conditions-of-use/</loc><lastmod>2026-06-30</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

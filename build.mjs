@@ -1,30 +1,46 @@
 // Assemble final HTML pages from src/layout.html + src/pages/*.html
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 
 const R = process.cwd();
 const layout = fs.readFileSync(path.join(R, "src/layout.html"), "utf8");
+
+// asset version (content hash of css+js) for cache-busting
+const hashSrc = fs.readFileSync(path.join(R, "assets/css/styles.css")) + fs.readFileSync(path.join(R, "assets/js/main.js"));
+const V = crypto.createHash("sha1").update(hashSrc).digest("hex").slice(0, 8);
+
+// LCP hero image to preload per page (relative to site root via @/)
+const HERO_PRELOAD = {
+  "home.html": "assets/img/storage_hallways.jpeg",
+  "about.html": "assets/img/23-web-or-mls-DJI_20250107154046_0427_D-1024x576.jpg",
+  "expertise.html": "assets/img/banner_expertise.jpg",
+  "team.html": "assets/img/39-web-or-mls-DSC_1675-1536x1023.jpg",
+  "portfolio.html": "assets/img/23-web-or-mls-DJI_20250107154046_0427_D-1024x576.jpg",
+  "contact.html": "assets/img/contact-bg.jpg",
+  "terms.html": "assets/img/blue_bricks-lg.png",
+};
 
 const PAGES = [
   { file: "home.html",      out: "index.html",                              active: "",          canon: "/",
     title: "Merit Hill Capital - Real Estate Investment Firm in New York",
     desc: "Merit Hill Capital is a woman-owned real estate investment firm focused on acquiring, owning, and managing self-storage facilities across the U.S." },
   { file: "about.html",     out: "about/index.html",                        active: "about",     canon: "/about/",
-    title: "About - Merit Hill Capital",
-    desc: "Founded in 2016 by Liz Raun Schlesinger, Merit Hill Capital is a leading institutional self-storage investor." },
+    title: "About Merit Hill Capital — Institutional Self-Storage Investor",
+    desc: "Founded in 2016 by Liz Raun Schlesinger, Merit Hill Capital is a leading institutional self-storage investor with a disciplined, value-add approach." },
   { file: "expertise.html", out: "expertise/index.html",                    active: "expertise", canon: "/expertise/",
-    title: "Expertise - Merit Hill Capital",
-    desc: "Setting the standard in self-storage: a needs-based business in a fragmented, inefficient industry." },
+    title: "Self-Storage Investment Expertise — Merit Hill Capital",
+    desc: "Why self-storage and how Merit Hill drives value: a needs-based asset class in a fragmented industry, with a proprietary evaluation and value-add process." },
   { file: "team.html",      out: "team/index.html",                         active: "team",      canon: "/team/",
-    title: "Team - Merit Hill Capital",
-    desc: "The Merit Hill advantage: an experienced team dedicated to integrity, perseverance, and the success of our partners.",
+    title: "Our Team — Merit Hill Capital Self-Storage",
+    desc: "Meet the Merit Hill Capital team: experienced self-storage professionals dedicated to integrity, perseverance, and the success of our partners.",
     scripts: '<script src="@/assets/js/team-data.js"></script>' },
   { file: "portfolio.html", out: "portfolio/index.html",                    active: "portfolio", canon: "/portfolio/",
-    title: "Portfolio - Merit Hill Capital",
-    desc: "National reach, local expertise: a diverse portfolio of self-storage assets across the United States." },
+    title: "Self-Storage Portfolio — Merit Hill Capital",
+    desc: "National reach, local expertise: Merit Hill Capital operates a diverse portfolio of 400+ self-storage properties across 39 states in the United States." },
   { file: "contact.html",   out: "contact/index.html",                      active: "contact",   canon: "/contact/",
-    title: "Contact - Merit Hill Capital",
-    desc: "Questions? Interested in selling your facility? Contact Merit Hill Capital." },
+    title: "Contact Merit Hill Capital — Self-Storage Investment",
+    desc: "Contact Merit Hill Capital with questions or to sell your self-storage facility. Reach our Brooklyn, NY and Dallas, TX teams or email IR@merithillcapital.com." },
   { file: "terms.html",     out: "terms-and-conditions-of-use/index.html",  active: "",          canon: "/terms-and-conditions-of-use/",
     title: "Terms and Conditions of Use - Merit Hill Capital",
     desc: "Terms and Conditions of Use for the Merit Hill Capital website." },
@@ -55,6 +71,9 @@ for (const pg of PAGES) {
     .replace(/\{\{TITLE\}\}/g, pg.title)
     .replace(/\{\{DESC\}\}/g, pg.desc)
     .replace(/\{\{CANON\}\}/g, pg.canon)
+    .replace(/\{\{V\}\}/g, V)
+    .replace("{{HEROPRELOAD}}", HERO_PRELOAD[pg.file]
+      ? `  <link rel="preload" as="image" href="@/${HERO_PRELOAD[pg.file]}" fetchpriority="high">\n` : "")
     .replace("{{BODYSCRIPTS}}", pg.scripts || "");
 
   // active nav state
@@ -72,8 +91,9 @@ console.log(`\n${built} pages built.`);
 
 // sitemap.xml (canonical production domain)
 const ORIGIN = "https://merithillcapital.com";
+const LASTMOD = new Date().toISOString().slice(0, 10);
 const urls = PAGES.map((p) =>
-  `  <url><loc>${ORIGIN}${p.canon}</loc><changefreq>monthly</changefreq><priority>${p.canon === "/" ? "1.0" : "0.7"}</priority></url>`
+  `  <url><loc>${ORIGIN}${p.canon}</loc><lastmod>${LASTMOD}</lastmod><changefreq>monthly</changefreq><priority>${p.canon === "/" ? "1.0" : "0.7"}</priority></url>`
 ).join("\n");
 fs.writeFileSync(path.join(R, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
