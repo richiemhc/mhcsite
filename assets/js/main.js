@@ -119,6 +119,20 @@
     if (window.matchMedia("(hover: none)").matches) card.addEventListener("click", flip);
   });
 
+  /* ---- Property cards: reveal details on tap/keyboard (hover shows them on pointer devices) ---- */
+  document.querySelectorAll(".prop-card").forEach((card) => {
+    const labelEl = card.querySelector(".prop-card__overlay h3") || card.querySelector(".prop-card__label");
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "button");
+    if (labelEl) card.setAttribute("aria-label", labelEl.textContent.trim() + " — details");
+    const toggle = () => card.classList.toggle("is-revealed");
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+    });
+    // Touch devices have no hover — let a tap flip the overlay open/closed.
+    if (window.matchMedia("(hover: none)").matches) card.addEventListener("click", toggle);
+  });
+
   /* ---- Count-up stats ---- */
   const counters = document.querySelectorAll("[data-count]");
   if (counters.length) {
@@ -195,6 +209,7 @@
     const mid = document.getElementById("mhts-mid");
     const prev = document.getElementById("mhts-prev");
     const next = document.getElementById("mhts-next");
+    const bar = document.getElementById("mhts-bar");
     if (!wrap || !vp || !track || !mid || !prev || !next) return; // not present / not ready yet
     mountMhts.done = true;
     const TOTAL = parseInt(wrap.dataset.total || "22", 10);
@@ -211,6 +226,7 @@
       track.style.transform = "translateX(-" + (cur * STEP) + "%)";
       prev.disabled = cur === 0;
       next.disabled = cur >= mx;
+      if (bar) { bar.style.width = (vis() / TOTAL * 100) + "%"; bar.style.left = (cur / TOTAL * 100) + "%"; }
       posArrows();
     };
     prev.addEventListener("click", () => { cur -= 1; render(); });

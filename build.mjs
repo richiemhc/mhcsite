@@ -94,7 +94,7 @@ const PAGES = [
 
 // Display order of team members (matches the original merithillcapital.com/team grid).
 // Integer-like object keys can't preserve order, so order is driven explicitly here.
-const TEAM_ORDER = ["37","372","46","61","49","361","59","1163","1762","2249","2250","1637","2035","1760","2246","1725","1506","1505","1721","1507","2233","1131","2039","1129","294","363","1617","1503","1160","969","1729"];
+const TEAM_ORDER = ["37","372","46","61","49","361","59","1163","1762","2249","2250","1637","2035","1760","2246","1725","1506","1505","harrison-carter","patrick-cheek","1721","1507","2233","1131","2039","1129","294","363","1617","1503","1160","969","1729"];
 
 // Build the team grid markup from the generated team data (keeps names/titles/photos in sync).
 function buildTeamGrid() {
@@ -102,12 +102,17 @@ function buildTeamGrid() {
   const json = js.replace(/^[\s\S]*?=\s*/, "").replace(/;\s*$/, "");
   const data = JSON.parse(json);
   const ids = [...TEAM_ORDER.filter((id) => data[id]), ...Object.keys(data).filter((id) => !TEAM_ORDER.includes(id))];
-  return ids.map((id) => [id, data[id]]).map(([id, d]) =>
+  const card = (id, d) =>
     `        <button class="team-card reveal" data-member="${id}">
           <img class="team-card__photo" src="${d.thumb}" alt="${(d.name || "").replace(/"/g, "&quot;")}" loading="lazy" width="220" height="220">
           <span class="team-card__name">${d.name || ""}</span>
           <span class="team-card__title">${d.title || ""}</span>
-        </button>`).join("\n");
+        </button>`;
+  // The founder (first member) is featured on her own centered row above the grid, matching the original.
+  const [firstId, ...restIds] = ids;
+  const featured = `        <div class="team-featured">\n${card(firstId, data[firstId])}\n        </div>`;
+  const grid = `        <div class="team-grid">\n${restIds.map((id) => card(id, data[id])).join("\n")}\n        </div>`;
+  return `${featured}\n${grid}`;
 }
 
 // Build the original-style horizontal "zigzag" milestone timeline (mhts).
@@ -125,6 +130,7 @@ function buildTimeline() {
             <div class="mhts-row mhts-row-bot">${bot}</div>
           </div></div>
           <button class="mhts-arrow mhts-next" id="mhts-next" aria-label="Next milestones"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7.6 22.55L5.6 20.525L14.175 11.95L5.6 3.375L7.6 1.35L18.2 11.95L7.6 22.55Z" fill="currentColor"/></svg></button>
+          <div class="mhts-progress" aria-hidden="true"><span class="mhts-progress__bar" id="mhts-bar"></span></div>
         </div>`;
 }
 

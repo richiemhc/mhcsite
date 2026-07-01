@@ -23,7 +23,7 @@
   <meta name="twitter:image" content="https://richiemhc.github.io/mhcsite/assets/img/og-image.png">
   <link rel="preload" href="../assets/fonts/files/roboto-kfo7cnqeu92fr1me7ksn66agldtyluama3yuba.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/files/cantataone-pli5fl60nb5obnzne2jslwxdvce.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../assets/css/styles.css?v=0478dde2">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=9eebc45a">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -82,7 +82,7 @@
     <a href="../team/">Team</a>
     <a href="../portfolio/">Portfolio</a>
     <a href="../contact/">Contact</a>
-    <a href="https://clients.alterdomus.com" target="_blank" rel="noopener">Login</a>
+    <a class="mobile-nav__login" href="https://clients.alterdomus.com" target="_blank" rel="noopener">Login</a>
   </nav>
 
   <main id="main">
@@ -93,32 +93,44 @@
     <section class="section section-intro center">
       <div class="container container--narrow reveal">
         <p class="lead">Founder and CEO Liz Raun Schlesinger is a self-storage trailblazer, having focused exclusively on the sector since 2006.</p>
+        <p>Liz, along with five original team members, have worked together to build a cohesive firm with more than thirty employees and a reputation for reliability, repeatability, and execution. The Merit Hill team is comprised of experienced professionals who are dedicated to integrity, perseverance, and the success of our partners.</p>
       </div>
     </section>
 
-    <section class="section band-navy center" style="background-image:url('../assets/img/blue_bricks-lg.png')">
+    <section class="section section--tight">
       <div class="container reveal">
-        <h2 class="section-title" style="margin-bottom:0.8em">Together, The Team Has:</h2>
-        <div class="stats">
-          <div class="stat"><span class="stat__num" data-count="12" data-suffix="+">12+</span><span class="stat__label">Years Average Experience</span></div>
-          <div class="stat"><span class="stat__num" data-count="410">410</span><span class="stat__label">Years Total Team Experience</span></div>
-          <div class="stat"><span class="stat__num" data-count="12400" data-suffix="+">12,400+</span><span class="stat__label">Separate Properties Evaluated</span></div>
+        <div class="team-stats">
+          <div class="team-stats__col">
+            <p class="team-stats__eyebrow">Together, The Team Has:</p>
+            <ul class="team-stats__list">
+              <li><span class="team-stats__num" data-count="12" data-suffix="+">12+</span><span class="team-stats__label">Years Average Experience</span></li>
+              <li><span class="team-stats__num" data-count="410">410</span><span class="team-stats__label">Years Total Team Experience</span></li>
+              <li><span class="team-stats__num" data-count="12400" data-suffix="+">12,400+</span><span class="team-stats__label">Separate Properties Evaluated</span></li>
+              <li><span class="team-stats__num" data-count="565">565</span><span class="team-stats__label">Properties Acquired Through 335+ Separate Transactions</span></li>
+              <li><span class="team-stats__num" data-count="154">154</span><span class="team-stats__label">Properties Sold In 16 Separate Transactions</span></li>
+              <li><span class="team-stats__num team-stats__num--text">$2.0 Billion</span><span class="team-stats__label">Raised of Equity Commitments</span></li>
+            </ul>
+          </div>
+          <div class="team-stats__photo">
+            <img src="../assets/img/team/Team-July-2024-337-scaled.jpg" alt="The Merit Hill Capital team" loading="lazy" width="1000" height="667">
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section section--team-grid">
       <div class="container reveal center">
         <h2 class="section-title">Leadership with Merit</h2>
-        <p class="team-lead">Liz, along with five original team members, have worked together to build a cohesive firm with more than thirty employees and a reputation for reliability, repeatability, and execution. The Merit Hill team is comprised of experienced professionals who are dedicated to integrity, perseverance, and the success of our partners.</p>
       </div>
       <div class="container reveal">
-        <div class="team-grid">
+        <div class="team-featured">
         <button class="team-card reveal" data-member="37">
           <img class="team-card__photo" src="../assets/img/team/liz-300x300.jpg" alt="Liz Raun Schlesinger" loading="lazy" width="220" height="220">
           <span class="team-card__name">Liz Raun Schlesinger</span>
           <span class="team-card__title">Founder & CEO</span>
         </button>
+        </div>
+        <div class="team-grid">
         <button class="team-card reveal" data-member="372">
           <img class="team-card__photo" src="../assets/img/team/Michael-Linn-1-300x300.jpg" alt="Michael Linn, CFA®" loading="lazy" width="220" height="220">
           <span class="team-card__name">Michael Linn, CFA®</span>
@@ -202,6 +214,16 @@
         <button class="team-card reveal" data-member="1505">
           <img class="team-card__photo" src="../assets/img/team/John-Sanchez-300x300.jpg" alt="John Sanchez" loading="lazy" width="220" height="220">
           <span class="team-card__name">John Sanchez</span>
+          <span class="team-card__title">Project Manager</span>
+        </button>
+        <button class="team-card reveal" data-member="harrison-carter">
+          <img class="team-card__photo" src="../assets/img/team/placeholder-300x300.png" alt="Harrison Carter" loading="lazy" width="220" height="220">
+          <span class="team-card__name">Harrison Carter</span>
+          <span class="team-card__title">Project Manager</span>
+        </button>
+        <button class="team-card reveal" data-member="patrick-cheek">
+          <img class="team-card__photo" src="../assets/img/team/placeholder-300x300.png" alt="Patrick Cheek" loading="lazy" width="220" height="220">
+          <span class="team-card__name">Patrick Cheek</span>
           <span class="team-card__title">Project Manager</span>
         </button>
         <button class="team-card reveal" data-member="1721">
@@ -324,7 +346,7 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=0478dde2" defer></script>
+  <script src="../assets/js/main.js?v=9eebc45a" defer></script>
 <script src="../assets/js/team-data.js"></script>
 </body>
 </html>

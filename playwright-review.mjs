@@ -76,7 +76,7 @@ log("\n== team: grid + modal ==");
   const page = await ctx.newPage();
   await page.goto(BASE + "/team/", { waitUntil: "domcontentloaded" });
   const cards = await page.locator(".team-card").count();
-  check(cards === 31, `31 team cards (got ${cards})`);
+  check(cards === 33, `33 team cards (got ${cards})`);
   check((await page.getByText(/Kaitlyn|Colton/).count()) === 0, "Kaitlyn & Colton removed");
   await page.locator(".team-card").first().click();
   await page.waitForTimeout(500);
