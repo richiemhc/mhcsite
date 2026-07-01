@@ -163,7 +163,9 @@ for (const pg of PAGES) {
   html = html.split("@/").join(prefix);
 
   fs.mkdirSync(path.dirname(path.join(R, pg.out)), { recursive: true });
-  fs.writeFileSync(path.join(R, pg.out), html);
+  // Normalize to LF so the output is byte-identical regardless of the source
+  // files' line endings (src/layout.html is often CRLF on Windows checkouts).
+  fs.writeFileSync(path.join(R, pg.out), html.replace(/\r\n/g, "\n"));
   built++;
   console.log("built", pg.out);
 }
