@@ -54,14 +54,17 @@
     const step = () => {
       const first = track.children[0];
       if (!first) return track.clientWidth;
-      const gap = parseFloat(getComputedStyle(track).gap) || 20;
+      const g = parseFloat(getComputedStyle(track).gap);   // gap:0 is valid — don't fall back to 20 for it
+      const gap = Number.isNaN(g) ? 20 : g;
       return first.getBoundingClientRect().width + gap;
     };
     const go = (dir) => {
       const max = track.scrollWidth - track.clientWidth;
-      let target = track.scrollLeft + dir * step();
-      if (target > max - 2) target = dir > 0 ? 0 : max;
-      if (target < 0) target = max;
+      const cur = track.scrollLeft;
+      // Land exactly on the last slide (clamp to max); only wrap when stepping past an end.
+      let target;
+      if (dir > 0) target = cur >= max - 2 ? 0 : Math.min(cur + step(), max);
+      else target = cur <= 2 ? max : Math.max(cur - step(), 0);
       track.scrollTo({ left: target, behavior: REDUCE ? "auto" : "smooth" });
     };
     if (next) next.addEventListener("click", () => go(1));
